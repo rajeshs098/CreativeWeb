@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Error!!
+  </title> <link rel="icon" type="image/x-icon" href="logo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  
+
+
+  
+  <div id="main-wrapper" class="fancy-scrollbar">
+    <div id="main">
+      <div id="content">
+
+        <div id="links-container" style="padding-left: 30%; padding-right: 30%;">
+          <a href="https://gmail.com">Gmail</a>
+          <a href="https://chat.openai.com/">Chart GPT</a>
+          <a href="https://github.com/rajeshs098">My site</a>
+          <a href="https://rajeshs.my.canva.site">About</a>
+        </div>
+        <div id="search-container" style="margin-top: 5%;">
+          <div id="search-input-container">
+            <img src="https://assets.codepen.io/1468070/Google+G+Icon.png" alt="" />
+            <input type="text" placeholder="Search anything" id="search" onkeypress="handleKeyPress(event)" />
+          </div>
+          </button>
+        </div>
+        <div class="mycontainer" style="padding-left: 10%; padding-right: 10%; padding-top: 1%;">
+          <div id="header-container">
+            <div class='parent'>
+              <div class='child'>
+                <main>
+                  <div class="atom">
+                    <div class="electron"></div>
+                    <div class="electron-alpha"></div>
+                    <div class="electron-omega"></div>
+                  </div>
+                </main>
+              </div>
+              <br></br>
+              
+              <div class='child'>
+                <button type="button" id="user-menu-button" style="margin-right: 10%; margin-top: 10%;">
+                  <img src="dp.png" style="height: 100px; width: 100px;" alt="" />
+                 
+                </button>
+                <div class="social-buttons">
+                  <a href="https://www.instagram.com/_rajeshs_/" class="social-button social-button--instagram" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="https://www.youtube.com/" class="social-button social-button--youtube" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                  <a href="#" class="social-button social-button--facebook" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/in/rajs21/" class="social-button social-button--linkedin" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="#" class="social-button social-button--snapchat" aria-label="Snapchat">
+                    <i class="fab fa-snapchat-ghost"></i>
+                  </a>
+                  <a href="https://github.com/rajeshs098" class="social-button social-button--github" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="https://codepen.io/" class="social-button social-button--codepen" aria-label="CodePen">
+                    <i class="fab fa-codepen"></i>
+                  </a>
+                  <!-- Add more social buttons as needed -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="datetime-location">
+            <div id="datetime"></div>
+            <div id="location"></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+function updateDateTime() {
+  const datetimeElement = document.getElementById('datetime');
+  const locationElement = document.getElementById('location');
+  
+  // Update date and time
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+  datetimeElement.textContent = now.toLocaleDateString('en-US', options);
+  
+  
+  // Update every 1 second
+  setTimeout(updateDateTime, 1000);
+}
+
+// Start updating date and time
+updateDateTime();
+</script>
+
+  <script>
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        googleSearch();
+      }
+    }
+
+    function googleSearch() {
+      var text = document.getElementById("search").value;
+      var cleanQuery = text.replace(" ", "+", text);
+      var url = 'http://www.google.com/search?q=' + cleanQuery;
+      window.location.href = url;
+    }
+  </script>
+
+<script>
+ 
+
+  const urlSpans = document.querySelectorAll('.url');
+
+  urlSpans.forEach(function(urlSpan) {
+    urlSpan.addEventListener('click', function(event) {
+      // Prevent the default behavior of the hyperlink
+      alert('User clicked on URL');
+      event.preventDefault();
+    });
+  });
+
+</script>
+
+<!-- updating the code title and flaticon icon  -->
+<script>
+//  get the elements from the DOM
+
+const savedUrl = localStorage.getItem('url');
+const nameSpan = document.querySelector('.name');
+const urlSpan = document.querySelector('.url');
+const icon = document.querySelector('.fa-stack-overflow');
+const link = document.querySelector('#link');
+
+// listen for changes in the content of the name and url spans
+// nameSpan.addEventListener('input', updateLink);
+urlSpan.addEventListener('input', updateLink);
+
+function updateLink() {
+  // update the text content of the name span with the root domain
+  const domain = new URL('http://' + urlSpan.textContent).hostname.replace('www.', '');
+  link.querySelector('.name').textContent = domain;
+  
+  // update the href of the link
+  link.href = 'http://' + urlSpan.textContent;
+  
+  // update the icon class
+  const iconClass = 'fa-brands fa-' + domain.split('.')[0];
+  icon.className = iconClass;
+
+  
+
+  // save the URL to local storage
+  localStorage.setItem('url', urlSpan.textContent);
+}
+
+// retrieve the saved URL from local storage when the page loads
+window.addEventListener('load', function() {
+  const savedUrl = localStorage.getItem('url');
+  if (savedUrl) {
+    urlSpan.textContent = savedUrl;
+    updateLink();
+  }
+});
+
+</script>
+
+  <script>
+    function googleSearch()
+    {
+        var text=document.getElementById("search").value;
+        var cleanQuery = text.replace(" ","+",text);
+        var url='http://www.google.com/search?q='+cleanQuery;
+    
+        window.location.href=url;
+    }
+    </script>
+  <script src='https://codepen.io/Hyperplexed/pen/xxYJYjM/54407644e24173ad6019b766443bf2a6.js'></script>
+</body>
